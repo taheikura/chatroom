@@ -1,0 +1,26 @@
+dotnet new webapi
+dotnet add package
+https://github.com/graphql-dotnet/graphql-dotnet
+https://github.com/graphql-dotnet/server
+
+AWSSDK.DynamoDBv2
+GraphQL.Server.Transports.AspNetCore
+GraphQL.Server.Transports.WebSockets
+GraphQL.Server.Ui.GraphiQL
+Newtonsoft.Json
+
+Access patterns
+- Create user (log in)
+- Create group
+- Look up all group names
+- User joins group
+- Look up latest messages by group and sort by time
+- User leaves group
+
+AWS DynamoDB Table
+MessageInventory
+PK					SK
+USER#<username>		#METADATA#<username>	<username>
+GROUP#<groupname>	#METADATA#<groupname>	<groupname>
+GROUP#<groupname>	USER#<username>			<username>	<groupname>
+MSG#<groupname>		TIME#<time>				<groupname>	<postedat>	<username>	<msg>
