@@ -8,7 +8,7 @@ using GraphQL.Server.Transports.Subscriptions.Abstractions;
 using GraphQL.Subscription;
 using GraphQL.Types;
 
-namespace ChatSchema
+namespace nsChatSchema
 {
     public class ChatSubscription : ObjectGraphType<object>
     {

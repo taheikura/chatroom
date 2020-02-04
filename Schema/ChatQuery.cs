@@ -1,7 +1,7 @@
 using System.Linq;
 using GraphQL.Types;
 
-namespace ChatSchema
+namespace nsChatSchema
 {
     public class ChatQuery : ObjectGraphType<object>
     {
