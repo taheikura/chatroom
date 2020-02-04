@@ -1,6 +1,6 @@
 using GraphQL.Types;
 
-namespace ChatSchema
+namespace nsChatSchema
 {
     public class ChatMutation : ObjectGraphType<object>
     {
