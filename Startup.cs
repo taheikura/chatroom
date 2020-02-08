@@ -16,6 +16,7 @@ using GraphQL.Server.Ui.GraphiQL;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using ChatGraphQL;
 using nsChatSchema;
+using GraphQL;
 
 namespace chatroom
 {
@@ -38,16 +39,18 @@ namespace chatroom
             {
                 options.AllowSynchronousIO = true;
             });
-            services.AddSingleton<ChatSchema>();
-            services.AddSingleton<IChat, nsChatSchema.Chat>();
 
+            services.AddSingleton<IChat, nsChatSchema.Chat>();
+            services.AddScoped<ChatSchema>();
+            services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddGraphQL(options =>
             {
-                options.EnableMetrics = true;
+                options.EnableMetrics = false;
                 options.ExposeExceptions = this.Environment.IsDevelopment();
             })
             .AddWebSockets()
             .AddDataLoader();
+            services.AddLogging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

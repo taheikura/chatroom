@@ -15,7 +15,7 @@ namespace nsChatSchema
         IObservable<Message> Messages(string groupname);
     }
 
-        public class Chat : IChat
+    public class Chat : IChat
     {
         private readonly ISubject<Message> _messageStream = new ReplaySubject<Message>(1);
 
