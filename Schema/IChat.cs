@@ -9,6 +9,7 @@ namespace nsChatSchema
     public interface IChat
     {
         ConcurrentStack<Message> AllMessages { get; }
+        ConcurrentStack<string> AllGroups { get; }
 
         Message AddMessage(Message message);
 
@@ -18,19 +19,23 @@ namespace nsChatSchema
     public class Chat : IChat
     {
         private readonly ISubject<Message> _messageStream = new ReplaySubject<Message>(1);
+        private readonly ISubject<string> _groupStream = new ReplaySubject<string>(1);
 
         public Chat()
         {
             AllMessages = new ConcurrentStack<Message>();
+            AllGroups = new ConcurrentStack<string>();
         }
 
         public ConcurrentStack<Message> AllMessages { get; }
+        public ConcurrentStack<string> AllGroups { get; }
 
         public Message AddMessage(Message message)
         {
+            // TODO: validate, check that group exists
             AllMessages.Push(message);
             _messageStream.OnNext(message);
-            // also add to DynamoDB
+            // TODO: also add to DynamoDB
             return message;
         }
 
